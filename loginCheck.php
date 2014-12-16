@@ -1,7 +1,6 @@
 <?php
 
-include ("./databaseClass.php");
-
+include ("./databaseClassMySQLi.php");
 if(empty($_POST['data']))
   {
     echo("data is empty!");
@@ -16,7 +15,7 @@ if(empty($_POST['data']))
 else
 {
   $db = new database();
-  $db->setup('root','emokid11','localhost','sase');
+  $db->connect();
 
   $data = $_POST['data'];
   $data = trim($data);
@@ -28,6 +27,7 @@ else
   $sql = "SELECT * FROM `user` WHERE $loc='$data'";
 
   $result = $db->send_sql($sql);
+  $db ->disconnect();
 
   if(!$result || mysqli_num_rows($result) > 0)
   {

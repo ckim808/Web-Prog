@@ -1,6 +1,6 @@
 <?php
 
-include ("./databaseClass.php");
+include ("./databaseClassMySQLi.php");
 
  
   if(empty($_POST['password']))
@@ -19,7 +19,8 @@ include ("./databaseClass.php");
   {
   
     $db = new database();
-    $db->setup('root','emokid11','localhost','sase');
+    $db->connect();
+
     $email = trim($_POST['email']);
     $email = addslashes($email);
     $password = trim($_POST['password']);
@@ -36,13 +37,14 @@ include ("./databaseClass.php");
 
     $sql = "SELECT * FROM `user` WHERE email='$email' AND passhash = '$password'";
     $result = $db->send_sql($sql);
+    $db ->disconnect();
      
     if(!$result || mysqli_num_rows($result) <= 0)
     {
         echo('
         <script type="text/javascript">
         
-          window.location = "LoginPageIncorrect.php"
+          window.location.href = "LoginPageIncorrect.php"
 
         </script>
         ');
@@ -58,7 +60,7 @@ include ("./databaseClass.php");
     echo('
         <script type="text/javascript">
         
-          window.location = "adminHome.php/"
+          window.location.href = "adminHome.php"
 
         </script>
         ');
