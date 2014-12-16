@@ -59,90 +59,52 @@
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<h1 class="page-header">Deliverable List</h1>
-					
-
-
-The list of deliverables is below. <br>
- From this page one can edit current deliverables and add a new ones.
- <br> <br>
  <a href="javascript: jQuery.facebox({ajax:'NewDelivPopUp.php'});" class = "btn btn-sm btn-primary" role = "button"> New Deliverable </a>
  <br> <br>
+					<div class="row">
+						<div class="col-md-6">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Task</th>
+										<th>Assigned By</th>
+										<th>Status</th>
+										<th>Due Date</th>
 
-						<div class="row">
-							<div class="col-md-6">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Deliverable</th>
-											<th>Owner</th>
-											<th>Assigned</th>
-											<th>Due Date</th>
-
-										</tr>
-									</thead>
-									<tbody data-link="row" class="rowlink">
-										<tr class ="warning">
-											<td>1</td>
-											<td><a href="javascript: jQuery.facebox({ajax:'BusDelivPopUp.php'});"> Bus Confirmation </a></td>
-											<td>Catherine Kim</td>
-											<td>Started</td>
-											<td>12/01/2014</th>
-											</tr>
-											<tr class ="success">
-												<td>2</td>
-												<td>Conference Registration</td>
-												<td>Catherine Kim</td>
-												<td>Finished</td>
-												<td>12/01/2014</th>
-												</tr>
-												<tr class = "danger">
-													<td>3</td>
-													<td>Jurassic Park Screening</td>
-													<td>Catherine Kim</td>
-													<td>Assigned</td>
-													<td>12/01/2014</th>
-													</tr>
-													<tr class="warning">
-														<td>4</td>
-														<td>Buy Food for Meeting</td>
-														<td>Catherine Kim</td>
-														<td>Started</td>
-														<td>12/01/2014</th>
-														</tr> 
-
-														<?php
-														$num=4;
-														$radioValue;
-
-														if((!empty($_GET['Name'][0])) && (!empty($_GET['Person'][0])) && (!empty($_GET['Date'][0])))
-														{
-															$radioValue = $_GET['state']; 
-															
-																$var = "<tr class ='success'>
-																<td> 5 </td>
-																<td> " . $_GET['Name'] . "</td> 
-																<td>" . $_GET['Person']. "</td>
-																<td>" . $radioValue . "</td>
-																<td>" . $_GET['Date'] . "</th>
-																</tr>";
-
-																echo $var; 
-														} 
-														?>
-
-														</tbody>
-													</table>
-												</div>
-												
-
-
-
-
-  </div>
-</div>
-</div>
-</div>
+									</tr>
+								</thead>
+								<tbody data-link="row" class="rowlink">
+									<tr class ="warning">
+										<td><a href="javascript: jQuery.facebox({ajax:'BusDelivPopUp.php'});"> Bus Confirmation </a></td>
+										<td>Catherine Kim</td>
+										<td>Started</td>
+										<td>12/01/2014</th>
+									</tr>
+									<tr class ="success">
+										<td>Conference Registration</td>
+										<td>Catherine Kim</td>
+										<td>Finished</td>
+										<td>12/01/2014</th>
+									</tr>
+									<tr class = "danger">
+										<td>Jurassic Park Screening</td>
+										<td>Catherine Kim</td>
+										<td>Assigned</td>
+										<td>12/01/2014</th>
+									</tr>
+									<tr class="warning">
+										<td>Buy Food for Meeting</td>
+										<td>Catherine Kim</td>
+										<td>Started</td>
+										<td>12/01/2014</th>
+									</tr> 
+								</tbody>
+							</table>
+						</div>											
+					</div>
+				</div>
+			</div>
+		</div>
 <a href="javascript: jQuery.facebox({ajax:'hello.php'});">Programmatic ajax.</a><br/>
     <!-- Bootstrap core JavaScript
     ================================================== -->
