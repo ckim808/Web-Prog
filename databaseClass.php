@@ -11,9 +11,9 @@ class database
 	private $link;
 	private $res;
 	private $host = "localhost"; // change to your default
-	private $user = "username"; // change to your default
-	private $pass = ""; // change to your default
-	private $db;
+	private $user = "root"; // change to your default
+	private $pass = "yoseob4ever"; // change to your default
+	private $db = "sase";
 	// sets user, pass and host and connects
 	public function setup($u, $p, $h, $db)
 	{

@@ -15,7 +15,7 @@ include ("./databaseClass.php");
   {
   
     $db = new database();
-    $db->setup('root','emokid11','localhost','sase');
+    $db->connect();
     $email = trim($_POST['email']);
     $email = addslashes($email);
     $password = trim($_POST['password']);
@@ -49,7 +49,7 @@ include ("./databaseClass.php");
     echo('
         <script type="text/javascript">
         
-          window.location = "adminHome.php/"
+          window.location = "adminHome.php"
         </script>
         ');
     
