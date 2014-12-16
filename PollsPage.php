@@ -58,86 +58,125 @@
   					</ul>
   				</div>
   				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  					<h1 class="page-header">Polls Page</h1>				
+  					<h1 class="page-header">Polls Page</h1>
+
+
+
+  					The list of polls is below. <br>
+  					From this page one can edit the current polls and add create new ones. 
+  					<br><br>
+
+  					
+  					
   					<a href="javascript: jQuery.facebox({ajax:'NewPollPopUp.php'});" class = "btn btn-sm btn-primary" role = "button"> Add Poll </a>
   					<br> <br>
   					<FORM action ="PollsPage.php" method="GET">
   					<?php
-						// connect to database
-						include("databaseClassMySQLi.php");
-						$db = new database();
-						$db->connect();
-						
-						$part = "'EditPollPopUp.php'";
-						$link = 
-						'<a href="javascript: jQuery.facebox({ajax:' . $part . '});"'. 'class = "btn btn-sm btn-primary" role = "button"> Edit Poll </a>';
 
-						// get the polls that are already in the database
-						$query = "SELECT * FROM poll";
-						$res = $db->send_sql($query);
-						
-						// go through each poll and set the pollid, name, and desc
-						while($row = $res->fetch_assoc()) {
-							unset($pollid, $pollname, $polldesc, $optionquery, $optionarr, $poll);
-							$pollid = $row["id_poll"];
-							$pollname = $row["pollName"];
-							if(array_key_exists("pollDesc", $row))
-								$polldesc = $row["pollDesc"];
+  					$part = "'EditPollPopUp.php'";
+  					$link = 
+  					'<a href="javascript: jQuery.facebox({ajax:' . $part . '});"'. 'class = "btn btn-sm btn-primary" role = "button"> Edit Poll </a>';
 
-							//append html code to string
-							$poll ='
-							<section class ="well" id = "poll'.$pollid.'" >
-								<h3>'.$pollname.'</h3>';
-							if(isset($polldesc))
-								$poll = $poll.'<h4>'.$polldesc.'</h4>';
-							
-							//query the option table to get the options associated with current poll
-							$query = "SELECT * FROM poll_option WHERE id_poll = '".$pollid."'";
-							$optionarr = $db->send_sql($query);
-							
-							// keep track of how many people voted on this poll
-							$total_votes = 0;
-							/*while($optionrow = $optionarr->fetch_assoc())
-								$total_votes += $optionarr["tally"];
-							
-							$poll = $poll.'	
-								<br><P> Number of Votes: '.$total_votes.'</P>';
-							
-							while($optionrow = $optionarr->fetch_assoc()) {
-								
-							}
-							*/
-							$poll = $poll.'
-								<div class="alert alert-success" role="alert">
-									<strong>Option 1: </strong> Korean BBQ
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>
-								<div class="alert alert-info" role="alert">
-									<strong>Option 2:</strong> Italian
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>
-								<div class="alert alert-warning" role="alert">
-									<strong>Option 3:</strong> Mexican
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>
-								<div class="alert alert-danger" role="alert">
-									<strong>Option 4:</strong> Indian
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>' . $link . '
-								<button type = "submit" name= "poll0" value = "1" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
-							</section>
-							';
+  					$poll1 ='
+  					<section class ="well" id = "poll1" >
+  						<h3> Resteraunt Choice </h3> 
+  						<P> Number of Votes: 20</P>
+  						<div class="alert alert-success" role="alert">
+  							<strong>Option 1: </strong> Korean BBQ
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-info" role="alert">
+  							<strong>Option 2:</strong> Italian
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-warning" role="alert">
+  							<strong>Option 3:</strong> Mexican
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-danger" role="alert">
+  							<strong>Option 4:</strong> Indian
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>' . $link . '
+  						<button type = "submit" name= "poll0" value = "1" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
+  					</section>
+  					';
 
-							$polls[] = $poll;
-						}
+
+  					$poll2 ='
+  					<section class ="well" id = "poll1">
+  						<h3> Room Choice </h3> 
+  						<P> Number of Votes: 20</P>
+  						
+  						
+  						<div class="alert alert-success" role="alert">
+  							<strong>Option 1: </strong> Jacobus
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-info" role="alert">
+  							<strong>Option 2:</strong> Lieb 201
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-warning" role="alert">
+  							<strong>Option 3:</strong> BC 122
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-danger" role="alert">
+  							<strong>Option 4:</strong> Hayden Lounge
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>' . $link . '
+  						<button type = "submit" name= "poll1" value = "1" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
+  					</section>
+  					';
+
+
+  					$poll3 = '
+  					<section class ="well" id = "poll1" a>
+  						<h3> Film </h3>
+  						<P> Number of Votes: 20</P>
+  						<div class="alert alert-success" role="alert">
+  							<strong>Option 1: </strong> Jurassic Park
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-info" role="alert">
+  							<strong>Option 2:</strong> Star Wars
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-warning" role="alert">
+  							<strong>Option 3:</strong> Burn After Reading
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>
+  						<div class="alert alert-danger" role="alert">
+  							<strong>Option 4:</strong> Her
+  							<div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">60% Complete</span></div>
+  							</div> 
+  						</div>' . $link . '
+  						<button type = "submit" name= "poll2" value = "1" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
+  					</section>
+  					';
+  					$polls = array($poll1, $poll2, $poll3);
   					
   					for($i = 0; $i < count($polls); $i++)
   					{
