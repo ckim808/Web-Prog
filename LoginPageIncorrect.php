@@ -75,13 +75,12 @@
     <div class="container">
 
     <form class="form-signin" role="form" action="LoginScript.php" method="post">
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h1 class="form-signin-heading">LOGIN INCORRECT</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" name = "email" id="inputEmail" onchange="ajax_post('inputEmail','email','dispLoc','loginCheck.php')" class="form-control" placeholder="Email address" required autofocus>
     <div id="dispLoc"><b></b></div>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" name ="password" id="inputPassword"  class="form-control" placeholder="Password" required>
-
         <INPUT class="btn btn-lg btn-primary btn-block" type="submit">
       </form>
 
