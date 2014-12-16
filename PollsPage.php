@@ -154,9 +154,7 @@
   						echo $polls[$i]["text"];
   					}
   								
-  				//	echo $polls[0];
-  				//	echo $polls[1];
-  				//	echo $polls[2];
+					$db->disconnect();
 
   					?>
   					</FORM>
