@@ -1,26 +1,21 @@
 <?php
-
-include ("./databaseClassMySQLi.php");
-
+include ("./databaseClass.php");
  
   if(empty($_POST['password']))
   {
     echo("password is empty!");
     return false;
   }
-
   if(empty($_POST['email']))
   {
     echo("email is empty!");
     return false;
   }
-
   else
   {
   
     $db = new database();
-    $db->connect();
-
+    $db->setup('root','emokid11','localhost','sase');
     $email = trim($_POST['email']);
     $email = addslashes($email);
     $password = trim($_POST['password']);
@@ -34,34 +29,27 @@ include ("./databaseClassMySQLi.php");
     $salt = $saltArr[0];
  
     $password = md5(md5($password).md5($salt));
-
     $sql = "SELECT * FROM `user` WHERE email='$email' AND passhash = '$password'";
     $result = $db->send_sql($sql);
-    $db ->disconnect();
      
     if(!$result || mysqli_num_rows($result) <= 0)
     {
         echo('
         <script type="text/javascript">
         
-          window.location.href = "LoginPageIncorrect.php"
-
+          window.location = "LoginPageIncorrect.php"
         </script>
         ');
-
     }
    
     else
     {
-
     $test = session_start();
     $_SESSION['sessionVar'] = $email;
-
     echo('
         <script type="text/javascript">
         
-          window.location.href = "adminHome.php"
-
+          window.location = "adminHome.php/"
         </script>
         ');
     
@@ -69,4 +57,3 @@ include ("./databaseClassMySQLi.php");
    
   }
 ?>
-
