@@ -76,6 +76,7 @@
 						$query = "SELECT * FROM poll";
 						$res = $db->send_sql($query);
 						
+						$polls = array();
 						// go through each poll and set the pollid, name, and desc
 						while($row = $res->fetch_assoc()) {
 							unset($pollid, $pollname, $polldesc, $optionquery, $optionarr, $poll);
@@ -91,65 +92,66 @@
 							if(isset($polldesc))
 								$poll = $poll.'<h4>'.$polldesc.'</h4>';
 							
+							$polldata["id"] = $pollid;
+							$polldata["text"] = $poll;
+							$polls[] = $polldata;
+						}
+						
+						foreach($polls as &$elem) {
+							unset($max_votes);
 							//query the option table to get the options associated with current poll
-							$query = "SELECT * FROM poll_option WHERE id_poll = '".$pollid."'";
-							$optionarr = $db->send_sql($query);
+							$query = "SELECT * FROM poll_option WHERE id_poll = ".$elem["id"];
+							$res = $db->send_sql($query);
 							
 							// keep track of how many people voted on this poll
 							$total_votes = 0;
-							/*while($optionrow = $optionarr->fetch_assoc())
-								$total_votes += $optionarr["tally"];
-							
-							$poll = $poll.'	
+							$max_votes = 0;
+							while($row = $res->fetch_assoc()){
+								$total_votes += $row["tally"];
+								if(isset($max_votes))
+									if($max_votes < $row["tally"])
+										$max_votes = $row["tally"];
+								else
+									$max_votes = $row["tally"];
+							}
+							$elem["text"] = $elem["text"].'	
 								<br><P> Number of Votes: '.$total_votes.'</P>';
 							
-							while($optionrow = $optionarr->fetch_assoc()) {
-								
+							$res = $db->send_sql($query);
+							$counter = 0;
+							while($row = $res->fetch_assoc()) {
+								$counter++;
+								$choice = $row["optionText"];
+								$percent = 100;
+								if($total_votes != 0)
+									$percent = ($row["tally"]/$total_votes)*100;
+								if($row["tally"] == $max_votes) {
+									$elem["text"] = $elem["text"].'
+									<div class="alert alert-success" role="alert">
+										<strong>Option '.$counter.': </strong>'.$choice.'
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="'.$row["tally"].'" aria-valuemin="0" aria-valuemax="'.$total_votes.'" style="width: '.$percent.'%;"><span class="sr-only">60% Complete</span></div>
+										</div> 
+									</div>';
+								}
+								else {
+									$elem["text"] = $elem["text"].'
+									<div class="alert alert-danger" role="alert">
+										<strong>Option '.$counter.': </strong>'.$choice.'
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="'.$row["tally"].'" aria-valuemin="0" aria-valuemax="'.$total_votes.'" style="width: '.$percent.'%;"><span class="sr-only">60% Complete</span></div>
+										</div> 
+									</div>';
+								}
 							}
-							*/
-							$poll = $poll.'
-								<div class="alert alert-success" role="alert">
-									<strong>Option 1: </strong> Korean BBQ
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>
-								<div class="alert alert-info" role="alert">
-									<strong>Option 2:</strong> Italian
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>
-								<div class="alert alert-warning" role="alert">
-									<strong>Option 3:</strong> Mexican
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>
-								<div class="alert alert-danger" role="alert">
-									<strong>Option 4:</strong> Indian
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"><span class="sr-only">60% Complete</span></div>
-									</div> 
-								</div>' . $link . '
-								<button type = "submit" name= "poll0" value = "1" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
-							</section>
-							';
-
-							$polls[] = $poll;
+							$elem["text"] = $elem["text"].$link. '
+								<button type = "submit" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
+							</section>';
 						}
   					
   					for($i = 0; $i < count($polls); $i++)
   					{
-  						if((empty($_GET['poll' . $i][0])))
-  						{
-  							echo $polls[$i];
-  						}
-
-  						else
-  						{
-  						
-  						}
+  						echo $polls[$i]["text"];
   					}
   								
   				//	echo $polls[0];
