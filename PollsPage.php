@@ -66,10 +66,7 @@
 						// connect to database
 						include("databaseClassMySQLi.php");
 						$db = new database();
-						$db->connect();
-
-						
-					
+						$db->connect();	
 
 						// get the polls that are already in the database
 						$query = "SELECT * FROM poll";
@@ -82,7 +79,7 @@
 						while($row = $res->fetch_assoc()) 
 						{
 							
-							unset($pollid, $pollname, $polldesc, $optionquery, $optionarr, $poll);
+							unset($pollid, $pollname, $polldesc, $poll);
 							$pollid = $row["id_poll"];
 							$pollname = $row["pollName"];
 							if(array_key_exists("pollDesc", $row))
