@@ -1,7 +1,7 @@
 <?php include 'head.php'; ?>
     <body>
         <?php include 'top_nav.php'; ?>
-        <div class="container">
+        <div id="top" class="container">
             <h1>About Us</h1>
             <img id="howe" src="images/sase_howe.jpg" alt="Stevens SASE Banner"/>
             <h2>What is SASE?</h2>

@@ -1,7 +1,7 @@
 <?php include 'head.php'; ?>
 <body>
     <?php include 'top_nav.php'; ?>
-    <div class="container">
+    <div id="top" class="container">
         <h1>About Us</h1>
         
         <h2>What is SASE?</h2>

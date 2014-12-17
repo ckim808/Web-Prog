@@ -2,7 +2,7 @@
 <?php include 'head.php'; ?>
     <body>  
         <?php include 'top_nav.php'; ?>
-         <div class="container">
+         <div id="top" class="container">
         <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-9">
           <div class="container well well-main">
