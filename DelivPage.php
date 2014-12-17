@@ -71,7 +71,8 @@
 										<th>Status</th>
 										<th>Due Date</th>
                                         <th>Time Due</th>
-
+                                        <th>Change Status</th>
+                                        <th>Delete</th>
 									</tr>
 								</thead>
 								<tbody data-link="row" class="rowlink">
@@ -117,12 +118,28 @@
                                             else
                                                echo '   <td>Any</td>'; 
                                             echo 
-                                                '<th>
+                                                '
+                                                <td>
+                                                    <form action="change_status.php" method="POST" >
+						                              <select id="status" name="status" >';
+                                                if($status != "Assigned")
+                                                        echo '<option value="Assigned" >Assigned</option>';
+                                                if($status != "Started")
+                                                        echo '<option value="Started" >Started</option>';
+                                                if($status != "Finished")
+                                                        echo '<option value="Finished" >Finished</option>';
+                                              echo '
+                                                </select>
+                                                      <INPUT type="hidden" id = "secret" name="id" value="' . $row["id_deliv"] . '"/>
+                                                        <button type = "submit" >Submit</button>
+                                                    </form>
+                                                </td>
+                                                <td>
                                                     <form action="delete_deliv.php" method="POST" >
 						                              <INPUT type="hidden" id = "secret" name="id" value="' . $row["id_deliv"] . '"/>
-                                                        <button type = "submit" class = "delete_button" >Delete</button>
+                                                        <button type = "submit" >Delete</button>
                                                     </form>
-                                                </th>';
+                                                </td>';
                                         }
 									?>
                                     </tr>
