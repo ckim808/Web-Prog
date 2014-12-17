@@ -60,8 +60,9 @@
             <div id="dispLoc"><b></b></div>
             <br>
             <br>
-            <label for="password" >Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <label for="password" >Password</label> <br>
+            Passwords must be 4 to 8 charachters and have at least one num. 
+            <input type="password" name="password" required pattern="^(?=.+\d).{4,8}$" class="form-control" placeholder="Password" required>
             <br>
          <INPUT type="submit" name="submit" value="GO!"/>
 

@@ -39,14 +39,14 @@
       <form class="form-signup" role="form" action="createAccount.php" method="post">
 
         <label for="username">Name</label>
-        <INPUT type="text" name="name" placeholder="Name" class="form-control" required>
+        <INPUT type="text" name="name" placeholder="Name" class="form-control" required/>
             <br>
             <label for="inputEmail">Email Address</label>
-            <input type="email" name ="email" id="inputEmail" onblur="ajax_post('inputEmail','email','dispLoc')"class="form-control" placeholder="Email address" required autofocus >
+            <input type="email" name ="email" id="inputEmail" onblur="ajax_post('inputEmail','email','dispLoc')"class="form-control" placeholder="Email address" required autofocus />
             <div id="dispLoc"><b></b></div>
             <br>
             <label for="password" >Password</label>
-            <input type="password" pattern="^(?=.+\d).{4,8}$" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" title="4-8 char pass with num" name="password" class="form-control" placeholder="Password" required pattern="^(?=.+\d).{4,8}$" required/>
             <br>
             <INPUT type="submit" name="submit" value="GO!"/>
 
