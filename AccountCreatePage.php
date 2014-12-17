@@ -84,20 +84,6 @@
             <label for="password" >Password</label>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
             <br>
-            <label for="securityQuestion" >Security Question</label>
-            <br>
-            <br>
-            <select name="securityQuestion">
-             <option value="What is the name of your best friend?">What is the name of your best friend?</option>
-             <option value="What is the name of your best friend?">What is the name of your pet?</option>
-             <option value="What city were you born in?">What city were you born in?</option>
-         </select>
-         <br>
-         <br>
-         <label for="securityAns" class="sr-only">Security Answer</label>
-         <input type="text" name="securityAns" class="form-control" placeholder="Answer" required>
-         <br>
-
          <INPUT type="submit" name="submit" value="GO!"/>
 
 </form>

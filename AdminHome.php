@@ -56,6 +56,7 @@
 					<li ><a href="DelivPage.php">Deliverables</a><li>
 					<li><a href="PollsPage.php">Polls</a></li>
 					<li><a href="CalPage.php">Calendar</a></li>
+                    <li><a href="pendingUser.php">Manage New Users</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-6 col-sm-offset-3 col-md-7 col-md-offset-2 main">

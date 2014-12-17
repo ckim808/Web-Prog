@@ -54,7 +54,9 @@
 					<li ><a href="AdminHome.php">Home <span class="sr-only">(current)</span></a></li>
 					<li ><a href="DelivPage.php">Deliverables</a><li>
 						<li ><a href="PollsPage.php">Polls</a></li>
+
 						<li class="active"><a href="CalPage.php">Calendar</a></li>
+						<li><a href="pendingUser.php">Manage New Users</a></li>
 					</ul>
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
