@@ -59,7 +59,7 @@ include ("./databaseClass.php");
           window.location = "adminHome.php"
         </script>
         ');
-    
+    // hello this is a comments
     }
    
   }
