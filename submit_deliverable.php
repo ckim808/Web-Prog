@@ -13,6 +13,7 @@
     
     $query = "INSERT INTO notifications VALUES('','".$userid."','DelivPage.php','".$deliv."','New deliverable')"; 
     $res = $db->send_sql($query);
+    $db->disconnect();
 ?>
 
 <script type="text/javascript">    

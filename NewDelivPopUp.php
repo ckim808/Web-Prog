@@ -22,6 +22,7 @@
             while($row = $result->fetch_assoc()) {
                 echo '<INPUT type="radio" name="Person" value = '.$row["id"].' required checked />'.$row["name"].'<br>';    
             }
+            $db->disconnect();
         ?>
 		<br> Due Date: <br>
 		<INPUT type="date" name="Date" />

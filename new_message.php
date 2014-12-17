@@ -21,6 +21,7 @@
             while($row = $result->fetch_assoc()) {
                 echo '<INPUT type="radio" name="Person" value = '.$row["id"].' required checked />'.$row["name"].'<br>';    
             }
+            $db->disconnect();
         ?>
 		<br> Message: <br>
         <textarea name="text" rows="10" cols="50" required></textarea> 

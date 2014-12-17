@@ -5,6 +5,7 @@
 
     $query = "DELETE FROM deliverables WHERE id_deliv=".$_POST["id"];
     $res = $db->send_sql($query);
+    $db->disconnect();
 ?>
 
 <script type="text/javascript">    
