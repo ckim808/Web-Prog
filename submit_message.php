@@ -5,8 +5,9 @@
     $db->connect();
     $message = addslashes(strip_tags($_POST["text"]));
     $userid = $_POST["Person"];
+    $sessionID = $_SESSION['sessionUID'];
 
-    $query = "INSERT INTO messages VALUES('', '".$userid."','".$_SESSION['sessionUID']."','".$message."')";
+    $query = "INSERT INTO messages (`targetUser`, `fromUser`, `message`)  VALUES ('$userid' , '$sessionID' , '$message')";
     $res = $db->send_sql($query);
     $db->disconnect();
 ?>

@@ -10,7 +10,7 @@ echo(' Sorry, your user level is not high enough to access this page. You are be
 		}
 
 		document.write("You will be redirected to main page in 10 sec.");
-		setTimeout("history.go(-1)", 3000);
+		setTimeout("history.go(-2)", 3000);
 //-->
 	</script>
 	'
