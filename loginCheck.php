@@ -13,7 +13,7 @@ if(empty($_POST['data']))
 else
 {
   $db = new database();
-  $db->setup('root','emokid11','localhost','sase');
+  $db->connect();
   $data = $_POST['data'];
   $data = trim($data);
   $data = addslashes($data);

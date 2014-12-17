@@ -47,7 +47,7 @@
 
 <body>
 	<?php include 'portal_topnav.php'; ?>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
@@ -63,20 +63,19 @@
 
    <div class="jumbotron2">
         <h2> Upcoming Conference </h2>
-        <p> The SASE conference is taking palce on 12/01/2014. We are departing on 11/29. </p>
-        <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+        <p> The SASE conference is taking place on 12/01/2014. We are departing on 11/29 at 2pm. </p>
+        <p><a href="SASE_conference.php" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
 
       <div class="jumbotron2">
         <h2> Weekly Meeting </h2>
-        <p> We will have our Weekly meeting this coming Friday in Jacobus. </p>
-        <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+        <p> We will have our Weekly meeting this coming Friday in Jacobus at 7pm. </p>
       </div>
 
       <div class="jumbotron2">
         <h2> City Trip  </h2>
-        <p> The City Trip will take palce on 11/21 at 5pm. </p>
-        <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+        <p> The City Trip will take place on 11/21 at 5pm. </p>
+        <p><a href="https://www.facebook.com/events/381137955372730/?ref_dashboard_filter=past" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
 
  

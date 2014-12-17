@@ -29,7 +29,7 @@
 			</ul>
 		    </li>
                     <li><a href="SASE_Events.php">Events</a></li>
-                    <li><a href="#about">National Conference</a></li>
+                    <li><a href="SASE_conference.php">National Conference</a></li>
 		    <li><a href="#about">Photo Gallery</a></li>
                     <li><a href="SASE_ContactUs.php">Contact Us</a></li>
                   </ul>

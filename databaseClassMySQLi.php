@@ -11,7 +11,7 @@
 		private $res;
 		private $host = "127.0.0.1"; // change to your own default values
 		private $user = "root"; // change to your own default values
-		private $pass = "emokid11"; // change to your own default values
+		private $pass = "yoseob4ever"; // change to your own default values
 		private $db = "SASE"; // change to your own default values
 		private $mysqli;
 
