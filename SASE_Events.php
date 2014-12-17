@@ -31,7 +31,32 @@
                 // page is now ready, initialize the calendar...
                 $("#calendar").fullCalendar({
                    
-                    // put your options and callbacks here
+                     editable: false,
+     header: 
+     {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+
+    events: "events.php",
+
+    selectable: false,
+                    eventClick: function(calEvent, jsEvent, view) {
+            var starttime = calEvent.start.toLocaleString();
+            if(!calEvent.end)
+                var endtime = "";
+            else
+                var endtime = calEvent.end.toLocaleString();
+        alert('Event: ' + calEvent.title
+             + '\nDescription: ' + calEvent.description + '\nLocation: '
+             + calEvent.location + '\nStart Time: ' + starttime + '\nEnd Time: ' + 
+             endtime + '\nURL: ' + calEvent.url);
+
+        return false;
+
+    }
+    
                 })
             });
         </script>

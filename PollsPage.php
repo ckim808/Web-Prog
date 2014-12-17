@@ -165,9 +165,10 @@ $db->disconnect();
 							while($row = $res->fetch_assoc())
 							{
 								$total_votes += $row["tally"];
-								if(isset($max_votes))
+								if(isset($max_votes)){
 									if($max_votes < $row["tally"])
 										$max_votes = $row["tally"];
+                                }
 								else
 									$max_votes = $row["tally"];
 							}
