@@ -16,9 +16,6 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="AdminSettings.php">Settings</a></li>
-					<li><a href="AdminProfile.php">Profile</a></li>
-					<li><a href="Help.php">Help</a></li>
 					<li><a href="LoginPage.php">Logout</a></li>
 				</ul>
 			</div>

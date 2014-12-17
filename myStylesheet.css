@@ -67,6 +67,9 @@
   .jumbotron2 .h1 {
     font-size: 63px;
   }
-  
+  :disabled {
+  opacity: 0.65; 
+  cursor: not-allowed;
+}
 }
 

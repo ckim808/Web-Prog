@@ -136,9 +136,10 @@
                                                 </td>
                                                 <td>
                                                     <form action="delete_deliv.php" method="POST" >
-						                              <INPUT type="hidden" id = "secret" name="id" value="' . $row["id_deliv"] . '"/>
-                                                        <button type = "submit" >Delete</button>
-                                                    </form>
+						                              <INPUT type="hidden" id = "secret" name="id" value="' . $row["id_deliv"] . '"/>';
+                                                if($status == "Finished") echo '        <button type = "submit" >Delete</button>';
+                                                else echo '        <button type = "submit" disabled >Delete</button>';
+                                                 echo'   </form>
                                                 </td>';
                                         }
 									?>
