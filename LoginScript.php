@@ -16,13 +16,16 @@
   {
   
     $db = new database();
-   // $db->setup('root','emokid11','localhost','sase');
     $db->connect();
+
     $email = trim($_POST['email']);
     $email = addslashes($email);
+    $email = strip_tags($email);
+
     $password = trim($_POST['password']);
     $password = addslashes($password);
-   // $password = md5($password);
+    $password = strip_tags($password);
+
  
     $sql = "SELECT salt FROM `user` WHERE `email` = '$email'";
     
@@ -30,8 +33,10 @@
     $saltArr = mysqli_fetch_row($result);
     $salt = $saltArr[0];
  
-    $password = md5(md5($password).md5($salt));
+    $password = hash("sha256", $password);
+
     $sql = "SELECT * FROM `user` WHERE email='$email' AND passhash = '$password'";
+
     $result = $db->send_sql($sql);
      
     if(!$result || mysqli_num_rows($result) <= 0)
@@ -58,8 +63,8 @@
           window.location = "adminHome.php"
         </script>
         ');
-    // hello this is a comments
     }
    
   }
+  $db->disconnect();
 ?>

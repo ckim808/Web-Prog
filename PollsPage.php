@@ -98,11 +98,7 @@
 							$polldata["id"] = $pollid;
 								$part = "'EditPollPopUp.php'";
 						$link[$i] = 
-						'<form action="EditPollsPage.php" method="POST" >
-						<INPUT type="hidden" id = "secret" name="id" value="' . $polldata["id"] . '"/>
-						<button type = "submit" class="btn btn-sm btn-primary" type="submit" value"Edit Poll"> Edit Poll </button>
-						<br>
-						</form>
+						'
 						<form action="DelPollsPage.php" method="POST" >
 						<button type = "submit" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button>
 						<INPUT type="hidden" id = "secret" name="id" value="' . $polldata["id"] . '"/> 
@@ -167,7 +163,7 @@
 									</div>';
 								}
 							}
-							$elem["text"] = $elem["text"] . $link[$i] . 
+							$elem["text"] = $elem["text"] . $link[$i];
 							$i++;
 						}
   					

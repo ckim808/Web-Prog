@@ -2,7 +2,7 @@
 
 include ("./databaseClass.php");
 
-//taken from the net 
+
 function saltGenerator($length) 
 {
     $validCharacters = "abcdefghijklmnopqrstuxyvwzABCDEFGHIJKLMNOPQRSTUXYVWZ+-*#&@!?";
@@ -53,26 +53,35 @@ function saltGenerator($length)
   
     $db = new database();
     $db->connect();
+
     $name = trim($_POST['name']);
     $name = addslashes($name);
+    $name = strip_tags($name);
+
     $password = trim($_POST['password']);
     $password = addslashes($password);
-    $password = md5($password);
+    $password = strip_tags($password);
+    $password = hash("sha256", $password);
+
     $email = trim($_POST['email']);
     $email = addslashes($email);
+    $email = strip_tags($email);
+
     $passResetQuestion = trim($_POST['securityQuestion']);
     $passResetQuestion = addslashes($passResetQuestion);
+    $passResetQuestion = strip_tags($passResetQuestion);
+
+
     $passResetAnswer = trim($_POST['securityAns']);
     $passResetAnswer = addslashes($passResetAnswer);
+    $passResetAnswer = strip_tags($passResetAnswer);
+
     $salt = saltGenerator(5);
-   // $salt = md5($salt);
-    $password = md5($password.md5($salt));
+
 
     $sql = "INSERT INTO `user`(`name`, `email`, `passhash`,`passResetQuestion`,`passResetAnswer`,`salt`) VALUES ('$name', '$email', '$password', '$passResetQuestion', '$passResetAnswer','$salt')";
     $db->send_sql($sql);
-
   }
-
 
 ?>
 

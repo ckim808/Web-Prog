@@ -8,36 +8,7 @@
 	<title>Facebox 1.2 Programmatic Tests</title>
 
 	<script>
-		function ajax_post(loc,dispLoc,file)
-		{
-			var hr = new XMLHttpRequest();
-			var url = file;
-			var data = document.getElementById(loc).value;
-			var vars = "data="+data;
-			hr.open("POST", url, true);
-			hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			hr.onreadystatechange = function() 
-			{
-				if(hr.readyState == 4 && hr.status == 200) 
-				{
-					var return_data = hr.responseText;
-					var num = return_data.charAt(0);
-					num = parseInt(num);
-          var optionString = ""; //= "Option 1: <br><INPUT type='text' name='Option1'/><br>"; 
-         // var
-         for (i=1; i <= num; i++)
-         {
-         	var stringI = i.toString();
-         	optionString = optionString + "Option " + stringI + ": <br><INPUT type='text' name='Option" + stringI +"'/><br>";
-         }
-         
-         document.getElementById(dispLoc).innerHTML = optionString;
-     }
- }
- 
-    hr.send(vars); // Actually execute the request
-    
-}
+
 
 function ajax_post(loc,dispLoc,file)
 {
@@ -52,14 +23,13 @@ function ajax_post(loc,dispLoc,file)
 		if(hr.readyState == 4 && hr.status == 200) 
 		{
 			var return_data = hr.responseText;
-			var num = return_data.charAt(0);
+			var num = return_data;//.charAt(0);
 			num = parseInt(num);
-          var optionString = ""; //= "Option 1: <br><INPUT type='text' name='Option1'/><br>"; 
-         // var
+          var optionString = ""; 
          for (i=1; i <= num; i++)
          {
          	var stringI = i.toString();
-         	optionString = optionString + "Option " + stringI + ": <br><INPUT type='text' name='Option" + stringI +"'/><br>";
+         	optionString = optionString + "Option " + stringI + ": <br><INPUT type='text' name='Option" + stringI +"' required/><br>";
          }
          
          document.getElementById(dispLoc).innerHTML = optionString;
@@ -75,31 +45,28 @@ function ajax_post(loc,dispLoc,file)
 
 <h1> Create New Poll </h1>
 
+<FORM action ="pollCreationScript.php" method="POST" id ="formPlace"
 
-<form action="demo_form.asp">
 	Choose the Number of Options(between 1 and 9): 
 	<br>
-	<input type="number" name="num" id="num" min="1" max="9" onchange="ajax_post('num','dispLoc','newPollScript.php')">
-</form>
-<br>
-
+	<input type="number" name="num" id="num" min="1" max="100" onchange="ajax_post('num','dispLoc','newPollScript.php')" required>
 
 <br>
 
-<FORM action ="pollCreationScript.php" method="POST" id ="formPlace">
+
+<br>
 
 	Poll Title: <br>  
 
-	<INPUT type="text" name="Name" id="farts"/> <br>
+	<INPUT type="text" name="Name" required/> <br>
 	<INPUT type="hidden" id = "secrets" name="num"/> 
 	
 	<br>
 	<div id="dispLoc"><b></b></div>
-	<br> Accessible By: <br>
 
 
 	Poll Description: <br>
-	<textarea rows="4" cols="50" name= "description">This poll is for us to deicde which day to take a trip to the city.
+	<textarea rows="4" cols="50" name= "description" >
 	</textarea>
 	<br>
 
