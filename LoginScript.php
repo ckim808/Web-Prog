@@ -15,7 +15,8 @@ include ("./databaseClass.php");
   {
   
     $db = new database();
-    $db->setup('root','emokid11','localhost','sase');
+   // $db->setup('root','emokid11','localhost','sase');
+    $db->connect();
     $email = trim($_POST['email']);
     $email = addslashes($email);
     $password = trim($_POST['password']);
@@ -45,11 +46,17 @@ include ("./databaseClass.php");
     else
     {
     $test = session_start();
-    $_SESSION['sessionVar'] = $email;
+
+    $sql = "SELECT id FROM `user` WHERE `email` = '$email'";
+    $userArr = mysqli_fetch_row($result);
+    $UID = $userArr[0];
+
+    $_SESSION['sessionEmail'] = $email;
+    $_SESSION['sessionUID'] = $UID;
     echo('
         <script type="text/javascript">
         
-          window.location = "adminHome.php/"
+          window.location = "adminHome.php"
         </script>
         ');
     

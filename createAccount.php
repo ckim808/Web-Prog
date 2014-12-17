@@ -52,7 +52,7 @@ function saltGenerator($length)
   {
   
     $db = new database();
-    $db->setup('root','emokid11','localhost','sase');
+    $db->connect();
     $name = trim($_POST['name']);
     $name = addslashes($name);
     $password = trim($_POST['password']);

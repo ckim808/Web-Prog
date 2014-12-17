@@ -24,25 +24,8 @@
 		<INPUT type="text" name="Option3" value = "Mexican" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
 		<br> Option 4: <br>
 		<INPUT type="text" name="Option4" value = "Indian" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
-		<br> Accessible By: <br>
-		 <div class="checkbox">
-    <label>
-      <input type="checkbox"> Admin
-    </label>
-     <div class="checkbox">
-    <label>
-      <input type="checkbox"> Eboard Members
-    </label>
-     <div class="checkbox">
-    <label>
-      <input type="checkbox"> Sponsors
-    </label>
-     <div class="checkbox">
-    <label>
-      <input type="checkbox"> Members
-    </label>
+	
 
-		<br><br>
 		Poll Description: <br>
 		<textarea rows="4" cols="50" name= "description>">
 This poll is for us to deicde which day to take a trip to the city.
