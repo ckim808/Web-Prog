@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -57,7 +58,7 @@
 					<li><a href="CalPage.php">Calendar</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="col-sm-6 col-sm-offset-3 col-md-7 col-md-offset-2 main">
 				<h1 class="page-header">Home Page</h1>
 					
 
@@ -79,10 +80,123 @@
       </div>
 
  
-  </div>
+        </div>
+        <div id="right-home-menu" class="col-sm-4 col-md-3 pull-right">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Notifications</div>
+                    <div class="list-group">
+                        <?php
+                            include ("databaseClassMySQLi.php");
+                            $db = new database();
+                            $db->connect(); 
+                            // get the deliverables that are already in the database
+                            $curr_userid = $_SESSION['sessionUID'];
+                            $query = "SELECT * FROM notifications WHERE targetUser = ".$curr_userid;
+                            $res = $db->send_sql($query);
+                             while($row = $res->fetch_assoc()) {
+                                 if(isset($row["link"]) && isset($row["description"]))
+                                 {
+                                     echo '<a href='.$row["link"].' id="group-item" class="list-group-item" >
+                                     <div class="row">
+                                        <div>
+                                            <h4 class="list-group-item-heading">'.$row["title"].'</h4>
+                                            <p class="list-group-item-text">'.$row["description"].'</p>
+                                        </div>
+                                        <form action="hide_notification.php" method="POST">
+                                            <input type="hidden" id="secret" name="id" value="'.$row["id_notification"].'" />
+                                            <button class="btn pull-right" type="submit">Hide</button>
+                                        </form>
+                                    </div>
+                                    </a>';
+                                     
+                                 }
+                                 else if(isset($row["link"]))
+                                 {
+                                     echo '<a href='.$row["link"].' id="group-item" class="list-group-item" >
+                                     <div class="row">
+                                        <h4 class="list-group-item-heading">'.$row["title"].'</h4>
+                                        <form action="hide_notification.php" method="POST">
+                                            <input type="hidden" id="secret" name="id" value="'.$row["id_notification"].'" />
+                                            <button class="btn" type="submit">Hide</button>
+                                        </form>
+                                    </div>
+                                    </a>';
+                                 }
+                                 else if(isset($row["description"])) 
+                                 {
+                                        echo '<div id="group-item" class="list-group-item" >
+                                     <div class="row">
+                                        <div>
+                                            <h4 class="list-group-item-heading">'.$row["title"].'</h4>
+                                            <p class="list-group-item-text">'.$row["description"].'</p>
+                                        </div>
+                                        <form action="hide_notification.php" method="POST">
+                                            <input type="hidden" id="secret" name="id" value="'.$row["id_notification"].'" />
+                                            <button class="btn" type="submit">Hide</button>
+                                        </form>
+                                    </div>
+                                    </div>'; 
+                                 }
+                                 else
+                                 {
+                                     echo '<div id="group-item" class="list-group-item" >
+                                     <div class="row">
+                                        <h4 class="list-group-item-heading">'.$row["title"].'</h4>
+                                        <form action="hide_notification.php" method="POST">
+                                            <input type="hidden" id="secret" name="id" value="'.$row["id_notification"].'" />
+                                            <button class="btn" type="submit">Hide</button>
+                                        </form>
+                                    </div>
+                                    </div>';
+                                 }                       
+                             }
+                        ?> 
+                            
+                    </div>
+            </div><br><br>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Messages</div>
+                <div class="list-group">
+                    <?php
+                            
+                            // get the deliverables that are already in the database
+                            $curr_userid = $_SESSION['sessionUID'];
+                            $query = "SELECT * FROM messages WHERE targetUser = ".$curr_userid;
+                            $res = $db->send_sql($query);
+
+                            $messages = array();
+                             while($row = $res->fetch_assoc()) {
+                                 unset($current);
+                                 $current = array();
+                                 $current["id"] = $row["id_message"];
+                                 $current["fromUser"] = $row["fromUser"];
+                                 $current["message"] = $row["message"];
+                                 $messages[] = $current;
+                             }
+                            foreach($messages as $elem)
+                            {
+                                $query = "SELECT name FROM user WHERE id = ".$elem["fromUser"];
+                                $res = $db->send_sql($query);
+                                echo '<div id="group-item" class="list-group-item" >
+                                     <div class="row">
+                                        <div>
+                                            <h4 class="list-group-item-heading">New Message from '.$res->fetch_assoc()["name"].'</h4>
+                                            <p class="list-group-item-text">'.$elem["message"].'</p>
+                                        </div>
+                                        <form action="hide_message.php" method="POST">
+                                            <input type="hidden" id="secret" name="id" value="'.$elem["id"].'" />
+                                            <button class="btn pull-right" type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                    </div>';                                    
+                             }
+                       $db->disconnect(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div>
+
 <a href="javascript: jQuery.facebox({ajax:'hello.php'});">Programmatic ajax.</a><br/>
     <!-- Bootstrap core JavaScript
     ================================================== -->

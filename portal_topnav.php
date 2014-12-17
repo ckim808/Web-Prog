@@ -16,6 +16,9 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="javascript: jQuery.facebox({ajax:\'new_message.php\'});" id="top_button" class = "btn btn-sm btn-default" role = "button"> New Message </a>
+                    </li>
 					<li><a href="LoginPage.php">Logout</a></li>
 				</ul>
 			</div>

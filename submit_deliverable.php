@@ -10,6 +10,9 @@
 
     $query = "INSERT INTO deliverables VALUES('', '".$userid."','".$deliv."','".$duedate."','".$time."','".$status."')";
     $res = $db->send_sql($query);
+    
+    $query = "INSERT INTO notifications VALUES('','".$userid."','DelivPage.php','".$deliv."','New deliverable')"; 
+    $res = $db->send_sql($query);
 ?>
 
 <script type="text/javascript">    
