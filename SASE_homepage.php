@@ -1,3 +1,4 @@
+<link href="myStylesheet.css" rel="stylesheet" type="text/css" />
 <?php include 'head.php'; ?>
     <body>  
         <?php include 'top_nav.php'; ?>
@@ -55,7 +56,7 @@
               <!-- /END THE FEATURETTES -->
 
             </div><!-- /.container -->
-            <div id="right-home-menu" class="col-sm-4 col-md-3 pull-right">
+            <div id="main_polls" class="col-sm-4 col-md-3">
                 <?php 
                     // connect to database
                     include("databaseClassMySQLi.php");
@@ -78,12 +79,21 @@
                         $polls[] = $poll;
                     }
                     foreach($polls as $elem) {
-                        $query = "SELECT * FROM poll";
+                        $query = "SELECT * FROM poll_option WHERE id_poll=".$elem["id"];
                         $res = $db->send_sql($query);
+                        echo '
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">'.$elem["pollname"].'</div>
+                                    <form id="voting" action="vote.php" method="POST">';
+                        while($row = $res->fetch_assoc()) 
+				        {
+                           echo '<input type="radio" name="choice" value="'.$row["id_pollOption"].'" checked required >'.$row["optionText"].'<br>';  
+                        }
+                        echo '
+                        <br><INPUT type="submit" name="submit" value="Vote"/>';
+                        echo '</form></div><br>';
                     }
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Notifications</div>
-                    </div>
+                    
                 ?>
             </div>
         </div>

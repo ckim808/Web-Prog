@@ -91,5 +91,13 @@
     background-color: lightgray;
 	
 }
+#main_polls{
+	margin-top: 25px;
+	padding-right: 100px;
+	margin-left: 25px;
+}
+#voting{
+	padding: 20px;
+}
 }
 
