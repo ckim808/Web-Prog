@@ -66,5 +66,5 @@
     }
    
   }
-  $db->disconnect();
+    $db->disconnect();
 ?>

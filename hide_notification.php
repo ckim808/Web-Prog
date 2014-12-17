@@ -5,6 +5,7 @@
 
     $query = "DELETE FROM notifications WHERE id_notification=".$_POST["id"];
     $res = $db->send_sql($query);
+    $db->disconnect();
 ?>
 
 <script type="text/javascript">    
