@@ -12,7 +12,7 @@ class database
 	private $res;
 	private $host = "localhost"; // change to your default
 	private $user = "root"; // change to your default
-	private $pass = "emokid11"; // change to your default
+	private $pass = "yoseob4ever"; // change to your default
 	private $db = "sase";
 	// sets user, pass and host and connects
 	public function setup($u, $p, $h, $db)

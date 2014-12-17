@@ -7,27 +7,35 @@
 	<title>Facebox 1.2 Programmatic Tests</title>
 	<h1> Create New Deliverable! </h1>
 
-	<FORM action ="DelivPage.php" method="GET">
+	<FORM action ="submit_deliverable.php" method="POST">
 		Deliverable Name: <br>  
-		<INPUT type="text" name="Name" value = "Party Supplies"/> <br>
+		<INPUT type="text" name="Name" required/> <br>
 		Person Responsible: <br>
-		<INPUT type="text" name="Person" value = "Catherine Kim" />
+		<?php
+            include ("./databaseClass.php");
+            $db = new database();
+            $db->connect();
+
+            $sql = "SELECT id, name FROM `user`";
+            $result = $db->send_sql($sql);
+            
+            while($row = $result->fetch_assoc()) {
+                echo '<INPUT type="radio" name="Person" value = '.$row["id"].' required checked />'.$row["name"].'<br>';    
+            }
+        ?>
 		<br> Due Date: <br>
-		<INPUT type="text" name="Date" value = "12/01/2014"/>
+		<INPUT type="date" name="Date" />
+        <br> Time Due: <br>
+		<INPUT type="time" name="Time" />
 		<br> Deliverable State: <br>
-		<input type="radio" name="state" value="Assigned" c>Assigned 
+		<input type="radio" name="state" value="Assigned" checked>Assigned 
 		<input type="radio" name="state" value="Started">Started 
-		<input type="radio" name="state" value="Finished" checked>Finished 
+		<input type="radio" name="state" value="Finished">Finished 
 		<br>
-		Deliverable Description: <br>
-		<textarea rows="4" cols="50" name= "description>">
-Put a description of the deliverable here!
-		</textarea>
 		<br>
 		The Person responsible for this deliverable will be notified of its creation.  
 		<br>
 		<INPUT type="submit" name="submit" value="GO!"/>
-		<a href="fakeDelEditDelete.php" class = "btn btn-sm btn-primary" role = "button"> Delete Deliverable </a>
 	</FORM>
 
 

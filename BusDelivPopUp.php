@@ -9,20 +9,16 @@
 
 	<FORM Method ="LINK" ACTION="FakeDelEdit.php">
 		Deliverable Name: <br>  
-		<INPUT type="text" name="Name" value = "Bus Confirmation" /> <br>
+		<INPUT type="text" name="Name" required/> <br>
 		Person Responsible: <br>
-		<INPUT type="text" name="Person" value = "Catherine Kim" />
+		<INPUT type="text" name="Person" required/>
 		<br> Due Date: <br>
-		<INPUT type="text" name="Date" value = "12/01/2014"/>
+		<INPUT type="text" name="Date" />
 		<br> Deliverable State: <br>
 		<input type="radio" name="state" value="Assigned" checked>Assigned 
-		<input type="radio" name="state" value="Started" checked>Started 
+		<input type="radio" name="state" value="Started">Started 
 		<input type="radio" name="state" value="Finished">Finished 
 		<br>
-		Deliverable Description: <br>
-		<textarea rows="4" cols="50" name= "description>">
-Get confirmation for our bus reservation. 
-		</textarea>
 		<br>
 		<P>The Person responsible for this deliverable will be notified of its update.</P>  
 		<br>

@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -67,37 +68,64 @@
 								<thead>
 									<tr>
 										<th>Task</th>
-										<th>Assigned By</th>
 										<th>Status</th>
 										<th>Due Date</th>
+                                        <th>Time Due</th>
 
 									</tr>
 								</thead>
 								<tbody data-link="row" class="rowlink">
-									<tr class ="warning">
-										<td><a href="javascript: jQuery.facebox({ajax:'BusDelivPopUp.php'});"> Bus Confirmation </a></td>
-										<td>Catherine Kim</td>
-										<td>Started</td>
-										<td>12/01/2014</th>
-									</tr>
-									<tr class ="success">
-										<td>Conference Registration</td>
-										<td>Catherine Kim</td>
-										<td>Finished</td>
-										<td>12/01/2014</th>
-									</tr>
-									<tr class = "danger">
-										<td>Jurassic Park Screening</td>
-										<td>Catherine Kim</td>
-										<td>Assigned</td>
-										<td>12/01/2014</th>
-									</tr>
-									<tr class="warning">
-										<td>Buy Food for Meeting</td>
-										<td>Catherine Kim</td>
-										<td>Started</td>
-										<td>12/01/2014</th>
-									</tr> 
+									<?php
+										// connect to database
+										include("databaseClassMySQLi.php");
+										$db = new database();
+										$db->connect();
+										// get the deliverables that are already in the database
+                                        $curr_userid = $_SESSION['sessionUID'];
+                                        $query = "SELECT * FROM deliverables WHERE targetUser = ".$curr_userid;
+										$res = $db->send_sql($query);
+										// go through each deliverable and get the ones for the target user
+                                        while($row = $res->fetch_assoc()) {
+											unset($status, $duedate, $time);
+											$targetUser = $row["targetUser"];
+											$taskDesc = $row["taskDesc"];
+											if(array_key_exists("status", $row)) $status = $row["status"];
+											if(array_key_exists("duedate", $row)) $duedate = $row["duedate"];
+											if(array_key_exists("timedue", $row)) $timedue = $row["timedue"];
+                                            if($status == "Assigned") 
+                                                echo '<tr class ="danger">';
+                                            else if($status == "Finished")
+                                                echo '<tr class ="success">';
+                                            else
+                                                echo '<tr class ="warning">';
+                                            echo 
+                                                '	<td><a href="javascript: jQuery.facebox({ajax:\'BusDelivPopUp.php\'});"> '.$taskDesc.'</a></td>';
+                                            if(isset($status))
+                                                echo '  <td>'.$status.'</td>';
+                                            else
+                                                echo '  <td>Assigned</td>';
+                                            if(isset($duedate))
+                                                echo '  <td>'.$duedate.'</td>';
+                                            else if($duedate = "0000-00-00")
+                                               echo '  <td>Ongoing</td>'; 
+                                            else
+                                               echo '   <td>Ongoing</td>';
+                                           if(isset($timedue))
+                                               echo '   <td>'.$timedue.'</td>';
+                                           else if($timedate = "00:00:00")
+                                               echo '  <td>Any</td>'; 
+                                            else
+                                               echo '   <td>Any</td>'; 
+                                            echo 
+                                                '<th>
+                                                    <form action="delete_deliv.php" method="POST" >
+						                              <INPUT type="hidden" id = "secret" name="id" value="' . $row["id_deliv"] . '"/>
+                                                        <button type = "submit" class = "delete_button" >Delete</button>
+                                                    </form>
+                                                </th>';
+                                        }
+									?>
+                                    </tr>
 								</tbody>
 							</table>
 						</div>											

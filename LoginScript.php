@@ -1,5 +1,6 @@
 <?php
-include ("./databaseClass.php");
+    $test = session_start();
+    include ("./databaseClass.php");
  
   if(empty($_POST['password']))
   {
@@ -45,8 +46,6 @@ include ("./databaseClass.php");
    
     else
     {
-    $test = session_start();
-
     $sql = "SELECT id FROM `user` WHERE `email` = '$email'";
     $userArr = mysqli_fetch_row($result);
     $UID = $userArr[0];
