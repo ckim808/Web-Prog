@@ -27,8 +27,6 @@
 			</ul>
 		    </li>
                     <li><a href="SASE_Events.php">Events</a></li>
-                    <li><a href="SASE_conference.php">National Conference</a></li>
-		    <li><a href="#about">Photo Gallery</a></li>
                     <li><a href="SASE_ContactUs.php">Contact Us</a></li>
                   </ul>
 		  <button onclick="location.href=\'LoginPage.php\';" id="login" type="button" class="navbar-button navbar-right">Log in</button>

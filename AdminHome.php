@@ -66,7 +66,7 @@
    <div class="jumbotron2">
         <h2> Upcoming Conference </h2>
         <p> The SASE conference is taking place on 12/01/2014. We are departing on 11/29 at 2pm. </p>
-        <p><a href="SASE_conference.php" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+        <p><a href="http://www.saseconnect.org/conference/" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
 
       <div class="jumbotron2">
@@ -94,6 +94,11 @@
                             $curr_userid = $_SESSION['sessionUID'];
                             $query = "SELECT * FROM notifications WHERE targetUser = ".$curr_userid;
                             $res = $db->send_sql($query);
+
+                            if(!$res || mysqli_num_rows($res) <= 0)
+                            {
+                                echo '<p class="list-group-item">No notifications</p>';
+                            }
                              while($row = $res->fetch_assoc()) {
                                  if(isset($row["link"]) && isset($row["description"]))
                                  {
@@ -164,6 +169,11 @@
                             $curr_userid = $_SESSION['sessionUID'];
                             $query = "SELECT * FROM messages WHERE targetUser = ".$curr_userid;
                             $res = $db->send_sql($query);
+                            
+                             if(!$res || mysqli_num_rows($res) <= 0)
+                            {
+                                echo '<p class="list-group-item">No messages</p>';
+                            }
 
                             $messages = array();
                              while($row = $res->fetch_assoc()) {

@@ -65,18 +65,7 @@
  <br> <br>
 					<div class="row">
 						<div class="col-md-6">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>Task</th>
-										<th>Status</th>
-										<th>Due Date</th>
-                                        <th>Time Due</th>
-                                        <th>Change Status</th>
-                                        <th>Delete</th>
-									</tr>
-								</thead>
-								<tbody data-link="row" class="rowlink">
+							
 									<?php
 										// connect to database
 										include("databaseClassMySQLi.php");
@@ -87,7 +76,24 @@
                                         $query = "SELECT * FROM deliverables WHERE targetUser = ".$curr_userid;
 										$res = $db->send_sql($query);
 										// go through each deliverable and get the ones for the target user
-                                        while($row = $res->fetch_assoc()) {
+                                            if(!$res || mysqli_num_rows($res) <= 0)
+                                            {
+                                                echo '<tr>No outstanding deliverables';
+                                            }
+                                            else {
+                                                echo '<table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Task</th>
+                                                            <th>Status</th>
+                                                            <th>Due Date</th>
+                                                            <th>Time Due</th>
+                                                            <th>Change Status</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody data-link="row" class="rowlink">';
+                                            while($row = $res->fetch_assoc()) {
 											unset($status, $duedate, $time);
 											$targetUser = $row["targetUser"];
 											$taskDesc = $row["taskDesc"];
@@ -142,6 +148,7 @@
                                                 else echo '        <button type = "submit" disabled >Delete</button>';
                                                  echo'   </form>
                                                 </td>';
+                                            }
                                         }
 									?>
                                     </tr>
