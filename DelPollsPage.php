@@ -11,6 +11,9 @@
   {
 
     $id = trim($_POST['id']);
+    $id = strip_tags($id);
+    $id = addslashes($id);
+
     $db = new database();
     $db->connect();
 

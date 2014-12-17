@@ -64,6 +64,7 @@ include ("./databaseClass.php");
         <meta http-equiv="refresh" content="3; url=SASE_homepage.php" />'
         );
     }
+    $db->disconnect();
     }
 
     

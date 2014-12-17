@@ -192,6 +192,7 @@ $db->disconnect();
                                                 </td>';
                                             }
                                         }
+                                        $db->disconnect();
 									?>
                                     </tr>
 								</tbody>
