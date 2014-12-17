@@ -28,6 +28,7 @@
 		    </li>
                     <li><a href="SASE_Events.php">Events</a></li>
                     <li><a href="SASE_ContactUs.php">Contact Us</a></li>
+                    <li><a href="SASE_SignUp.php">Sign Up</a></li>
                   </ul>
 		  <button onclick="location.href=\'LoginPage.php\';" id="login" type="button" class="navbar-button navbar-right">Log in</button>
                 </div>
