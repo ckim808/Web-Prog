@@ -7,7 +7,11 @@ if(empty($_POST['id']))
   return false;
 }
 
-
+if(empty($_POST['num']))
+{
+  echo("num is empty!");
+  return false;
+}
 
 else
 {
@@ -19,10 +23,12 @@ else
   $id = trim($id);
   $id = addslashes($id);
   $id = strip_tags($id);
-
   
+  $num = trim($_POST['num']);
+  $num = addslashes($num);
+  $num = strip_tags($num);
 
-  $query = "SELECT * FROM `pendinguser` WHERE `id` = '$id'";
+  $query = "SELECT * FROM `user` WHERE `id` = '$id'";
   $result = $db->send_sql($query);
 
   if(!$result || mysqli_num_rows($result) <= 0)
@@ -33,20 +39,15 @@ else
   else
   {
       $row = $result->fetch_assoc();
-    //  $id = $row["id"];
-      $email = $row["email"];
-      $passhash = $row["passhash"];
-      $name = $row["name"];
+      $group_id = $row["group_id"];
+      
+      $sql = "UPDATE `user` SET `group_id`= '$num' WHERE `id` = '$id'";
 
-      $sql = "INSERT INTO `user`(`id`, `email`, `passhash`, `group_id`, `name`) VALUES ('$id','$email','$passhash','1', '$name')";
-      $result = $db->send_sql($sql);
-
-      $sql = "DELETE FROM `pendinguser` WHERE `id` ='$id'";
       $result = $db->send_sql($sql);
 
        echo('
         <script type="text/javascript">
-          window.location = "pendingUser.php"
+          window.location = "topAdminPage.php"
         </script>
         ');
 

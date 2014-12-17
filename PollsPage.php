@@ -1,3 +1,46 @@
+<?php
+session_start();
+
+$requiredID = 2;
+
+$UID = $_SESSION['sessionUID'];
+
+//echo("$UID");
+include("databaseClassMySQLi.php");
+
+$db = new database();
+$db->connect();
+
+$sql = "SELECT * FROM `user` WHERE `id` = '$UID'";
+$result = $db->send_sql($sql);
+
+ if(!$result || mysqli_num_rows($result) <= 0)
+  {
+    echo('not found');
+  }
+
+   else
+  {
+      $row = $result->fetch_assoc();
+      $group_id = $row["group_id"];
+      
+      if($group_id <= $requiredID)
+      {
+
+      }
+
+      else
+      {
+        echo('
+        <script type="text/javascript">
+          window.location = "sorry.php"
+        </script>
+        ');
+      }
+
+  }
+$db->disconnect();
+?>
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,6 +99,7 @@
   						<li class="active"><a href="PollsPage.php">Polls</a></li>
   						<li><a href="CalPage.php">Calendar</a></li>
   						<li><a href="pendingUser.php">Manage New Users</a></li>
+  						<li class><a href="topAdminPage.php">Manage Admins</a></li>
   					</ul>
   				</div>
   				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -65,7 +109,6 @@
   					
   					<?php
 						// connect to database
-						include("databaseClassMySQLi.php");
 						$db = new database();
 						$db->connect();	
 

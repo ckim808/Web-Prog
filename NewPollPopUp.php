@@ -45,7 +45,7 @@ function ajax_post(loc,dispLoc,file)
 
 <h1> Create New Poll </h1>
 
-<FORM action ="pollCreationScript.php" method="POST" id ="formPlace"
+<FORM action ="pollCreationScript.php" method="POST" id ="formPlace">
 
 	Choose the Number of Options(between 1 and 9): 
 	<br>
@@ -66,7 +66,7 @@ function ajax_post(loc,dispLoc,file)
 
 
 	Poll Description: <br>
-	<textarea rows="4" cols="50" name= "description" ></textarea>
+	<INPUT type="text" name="desc" required/> <br>
 	<br>
 
 	<INPUT type="submit" name="submit" value="GO!"/>

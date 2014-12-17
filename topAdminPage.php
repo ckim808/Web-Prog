@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$requiredID = 2;
+$requiredID = 1;
 
 $UID = $_SESSION['sessionUID'];
 
@@ -41,6 +41,7 @@ $result = $db->send_sql($sql);
   }
 $db->disconnect();
 ?>
+
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -86,36 +87,99 @@ $db->disconnect();
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-</head>
+  </head>
 
-<body>
+  <body>
 	<?php include 'portal_topnav.php'; ?>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li ><a href="AdminHome.php">Home <span class="sr-only">(current)</span></a></li>
-					<li ><a href="DelivPage.php">Deliverables</a><li>
-						<li ><a href="PollsPage.php">Polls</a></li>
+  	<div class="container-fluid">
+  		<div class="row">
+  			<div class="col-sm-3 col-md-2 sidebar">
+  				<ul class="nav nav-sidebar">
+  					<li ><a href="AdminHome.php">Home <span class="sr-only">(current)</span></a></li>
+  					<li ><a href="DelivPage.php">Deliverables</a><li>
+  						<li ><a href="PollsPage.php">Polls</a></li>
+  						<li><a href="CalPage.php">Calendar</a></li>
+              <li class=><a href="pendingUser.php">Manage New Users</a></li>
+              <li class="active"><a href="topAdminPage.php">Manage Admins</a></li>
+  					</ul>
+  				</div>
+  				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  					<h1 class="page-header">Current Users</h1>		
+            <br>
+            Level 1: Highest Level Admin - Can change other user's rights.
+            <br>
+            Level 2: Admin - Can approve new users and use all other parts of admin page. 
+            <br>
+            Level 3: Base User - Can not access the admin portion of site.
+            <hr>		
 
-						<li class="active"><a href="CalPage.php">Calendar</a></li>
-						<li><a href="pendingUser.php">Manage New Users</a></li>
-						<li class><a href="topAdminPage.php">Manage Admins</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-					<h1 class="page-header">Calendar Page</h1>
-					
+
+<?php
 
 
-The Calendar is below. <br>
-From this page one can ...
- 
-  </div>
-</div>
-</div>
-</div>
-<a href="javascript: jQuery.facebox({ajax:'hello.php'});">Programmatic ajax.</a><br/>
+$db = new database();
+$db->connect();
+
+$query = "SELECT * FROM `user`";
+$res = $db->send_sql($query);
+
+if(!$res || mysqli_num_rows($res) <= 0)
+  {
+    echo('No Users Present');
+  }
+else
+{
+$rowArray;
+$i = 0;
+
+while($row = $res->fetch_assoc()) 
+{
+    unset($id, $email, $passhash, $name);
+    $id = $row["id"];
+    $email = $row["email"];
+    $passhash = $row["passhash"];
+    $name = $row["name"];
+    $group_id = $row["group_id"]; 
+    $rowArray[$i] = $row;
+    
+
+    echo("User's Name: ");
+    echo($name);
+    echo("<br>");
+    echo("User's Email: ");
+    echo($email);
+    echo("<br>");
+    echo("User's Acess Level: ");
+    echo($group_id);
+    echo("<br>");
+
+
+        echo('
+		<form action="userLevelScript.php" method="POST" >
+		<INPUT type="hidden" id = "secret" name="id" value="' . $id . '"/> 
+    <input type="number" name="num" id="num" min="1" max="3" value="3"' . $group_id .'" required/>
+    <button type = "submit" class = "btn btn-sm btn-success" role = "button"> Change User Level </button>
+		</form>');  
+    echo("<hr>");
+    $i++;
+}
+
+}
+
+?>
+  		
+
+
+
+  		
+
+
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	</body>
+  
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

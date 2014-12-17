@@ -12,8 +12,11 @@ if(empty($_POST['num']))
 
 else if(!empty($_POST['num']))
 {
-  $num = intVal($_POST['num']);
-  echo ($num);
+  $num = trim($_POST['num']);
+  $num = addslashes($num);
+  $num = strip_tags($num);
+  $num = intVal($num);
+  //echo ($num);
 }
 
 if(empty($_POST['Name']))
@@ -31,7 +34,7 @@ for($i = 1; $i < $num; $i++)
 }
 }
 
-if(empty($_POST['description']))
+if(empty($_POST['desc']))
 {
  echo("desc is empty!");
  return false;
@@ -60,11 +63,9 @@ else
 
    // echo($optionArr[$i]);
   //  echo('<br>');
-
-
-    
   }
-  $desc = trim($_POST['description']);
+
+  $desc = trim($_POST['desc']);
   $desc = addslashes($desc);
   $desc = strip_tags($desc);
  // echo("<br>");

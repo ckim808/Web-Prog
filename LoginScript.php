@@ -26,13 +26,6 @@
     $password = addslashes($password);
     $password = strip_tags($password);
 
- 
-    $sql = "SELECT salt FROM `user` WHERE `email` = '$email'";
-    
-    $result = $db->send_sql($sql);
-    $saltArr = mysqli_fetch_row($result);
-    $salt = $saltArr[0];
- 
     $password = hash("sha256", $password);
 
     $sql = "SELECT * FROM `user` WHERE email='$email' AND passhash = '$password'";

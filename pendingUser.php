@@ -1,3 +1,47 @@
+<?php
+session_start();
+
+$requiredID = 2;
+
+$UID = $_SESSION['sessionUID'];
+
+//echo("$UID");
+include("databaseClass.php");
+
+$db = new database();
+$db->connect();
+
+$sql = "SELECT * FROM `user` WHERE `id` = '$UID'";
+$result = $db->send_sql($sql);
+
+ if(!$result || mysqli_num_rows($result) <= 0)
+  {
+    echo('not found');
+  }
+
+   else
+  {
+      $row = $result->fetch_assoc();
+      $group_id = $row["group_id"];
+      
+      if($group_id <= $requiredID)
+      {
+
+      }
+
+      else
+      {
+        echo('
+        <script type="text/javascript">
+          window.location = "sorry.php"
+        </script>
+        ');
+      }
+
+  }
+$db->disconnect();
+?>
+
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,6 +100,7 @@
   						<li ><a href="PollsPage.php">Polls</a></li>
   						<li><a href="CalPage.php">Calendar</a></li>
               <li class="active"><a href="pendingUser.php">Manage New Users</a></li>
+              <li class><a href="topAdminPage.php">Manage Admins</a></li>
   					</ul>
   				</div>
   				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -64,7 +109,6 @@
 
 <?php
 
-include("databaseClass.php");
 $db = new database();
 $db->connect();
 
@@ -90,14 +134,16 @@ while($row = $res->fetch_assoc())
     $rowArray[$i] = $row;
     
 
+    echo("User's ID Number: ");
     echo($id);
     echo("<br>");
+    echo("User's Name: ");
     echo($name);
     echo("<br>");
+    echo("User's Email: ");
     echo($email);
     echo("<br>");
-    echo($passhash);
-    echo("<br>");
+
         echo('
 		<form action="addUsersScript.php" method="POST" >
 		<button type = "submit" class = "btn btn-sm btn-success" role = "button"> Add User </button>
