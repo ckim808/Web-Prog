@@ -61,24 +61,27 @@
   					<h1 class="page-header">Polls Page</h1>				
   					<a href="javascript: jQuery.facebox({ajax:'NewPollPopUp.php'});" class = "btn btn-sm btn-primary" role = "button"> Add Poll </a>
   					<br> <br>
-  					<FORM action ="PollsPage.php" method="GET">
+  					
   					<?php
 						// connect to database
 						include("databaseClassMySQLi.php");
 						$db = new database();
 						$db->connect();
+
 						
-						$part = "'EditPollPopUp.php'";
-						$link = 
-						'<a href="javascript: jQuery.facebox({ajax:' . $part . '});"'. 'class = "btn btn-sm btn-primary" role = "button"> Edit Poll </a>';
+					
 
 						// get the polls that are already in the database
 						$query = "SELECT * FROM poll";
 						$res = $db->send_sql($query);
 						
 						$polls = array();
+						$link = array();
 						// go through each poll and set the pollid, name, and desc
-						while($row = $res->fetch_assoc()) {
+						$i = 0;
+						while($row = $res->fetch_assoc()) 
+						{
+							
 							unset($pollid, $pollname, $polldesc, $optionquery, $optionarr, $poll);
 							$pollid = $row["id_poll"];
 							$pollname = $row["pollName"];
@@ -93,11 +96,27 @@
 								$poll = $poll.'<h4>'.$polldesc.'</h4>';
 							
 							$polldata["id"] = $pollid;
+								$part = "'EditPollPopUp.php'";
+						$link[$i] = 
+						'<form action="EditPollsPage.php" method="POST" >
+						<INPUT type="hidden" id = "secret" name="id" value="' . $polldata["id"] . '"/>
+						<button type = "submit" class="btn btn-sm btn-primary" type="submit" value"Edit Poll"> Edit Poll </button>
+						<br>
+						</form>
+						<form action="DelPollsPage.php" method="POST" >
+						<button type = "submit" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button>
+						<INPUT type="hidden" id = "secret" name="id" value="' . $polldata["id"] . '"/> 
+						</form>
+						</section>';  
+						
 							$polldata["text"] = $poll;
 							$polls[] = $polldata;
+							$i++;
 						}
-						
-						foreach($polls as &$elem) {
+						$i = 0;
+						foreach($polls as &$elem)
+						 {
+							
 							unset($max_votes);
 							//query the option table to get the options associated with current poll
 							$query = "SELECT * FROM poll_option WHERE id_poll = ".$elem["id"];
@@ -106,7 +125,8 @@
 							// keep track of how many people voted on this poll
 							$total_votes = 0;
 							$max_votes = 0;
-							while($row = $res->fetch_assoc()){
+							while($row = $res->fetch_assoc())
+							{
 								$total_votes += $row["tally"];
 								if(isset($max_votes))
 									if($max_votes < $row["tally"])
@@ -119,13 +139,15 @@
 							
 							$res = $db->send_sql($query);
 							$counter = 0;
-							while($row = $res->fetch_assoc()) {
+							while($row = $res->fetch_assoc()) 
+							{
 								$counter++;
 								$choice = $row["optionText"];
 								$percent = 100;
 								if($total_votes != 0)
 									$percent = ($row["tally"]/$total_votes)*100;
-								if($row["tally"] == $max_votes) {
+								if($row["tally"] == $max_votes) 
+								{
 									$elem["text"] = $elem["text"].'
 									<div class="alert alert-success" role="alert">
 										<strong>Option '.$counter.': </strong>'.$choice.'
@@ -134,7 +156,8 @@
 										</div> 
 									</div>';
 								}
-								else {
+								else 
+								{
 									$elem["text"] = $elem["text"].'
 									<div class="alert alert-danger" role="alert">
 										<strong>Option '.$counter.': </strong>'.$choice.'
@@ -144,9 +167,8 @@
 									</div>';
 								}
 							}
-							$elem["text"] = $elem["text"].$link. '
-								<button type = "submit" class = "btn btn-sm btn-danger" role = "button"> Delete Poll </button> 
-							</section>';
+							$elem["text"] = $elem["text"] . $link[$i] . 
+							$i++;
 						}
   					
   					for($i = 0; $i < count($polls); $i++)

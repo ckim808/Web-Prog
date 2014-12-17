@@ -85,10 +85,10 @@ else
 
   echo('
         <script type="text/javascript">
-        
+       
           window.location = "PollsPage.php"
-        </script>
-        ');
+       </script>
+       ');
 
 }
 

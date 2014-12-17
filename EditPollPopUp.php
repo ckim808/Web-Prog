@@ -1,9 +1,48 @@
 <?php
-
 include ("./databaseClass.php");
 
+ if(empty($_POST['id']))
+  {
+    echo("no id sent");
+    return false;
+  }
 
-?>
+  else
+  {
+  	
+    $id = trim($_POST['id']);
+    $id = intval($id);
+  }
+
+
+
+$db = new database();
+$db->connect();
+
+$sql = "SELECT * FROM `poll` WHERE id_poll = '$id'";
+$result = $db->send_sql($sql);
+$array = $result->fetch_assoc();
+
+
+$pollName = $array["pollName"];
+$pollDesc = $array["pollDesc"];
+
+$sql = "SELECT * FROM `poll_option` WHERE id_poll = '$id'";
+$result = $db->send_sql($sql);
+$optionArray;
+$i = 0;
+$votes = 0;
+while($array =$result->fetch_assoc())
+{
+	$optionArray[$i] = $array["optionText"];
+	$votes +=  $array["tally"];
+	$i++;
+}
+
+
+
+$printString = '
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -13,30 +52,72 @@ include ("./databaseClass.php");
 	<title>Facebox 1.2 Programmatic Tests</title>
 	<h1> Edit Poll </h1>
 
-	<FORM action ="PollsPage.php" method="GET">
+<FORM action ="PollsPage.php" method="GET">
 
-	Editing has been disabled because people have voted. 
-	<br>
-	<fieldset disabled>
-    <div class="form-group">
-		Poll Title: <br>  
-		<INPUT type="text" name="Name" value = "Resteraunt Choice" id="disabledTextInput" class="form-control" placeholder="Disabled input"/> <br>
-		<form role="form">
-		Option 1: <br>
-		<INPUT type="text" name="Option1" value = "Korean BBQ" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
-		<br> Option 2: <br>
-		<INPUT type="text" name="Option2" value = "Italian" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
-		<br> Option 3: <br>
-		<INPUT type="text" name="Option3" value = "Mexican" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
-		<br> Option 4: <br>
-		<INPUT type="text" name="Option4" value = "Indian" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
-	
+	';
 
-		Poll Description: <br>
-		<textarea rows="4" cols="50" name= "description>">
-This poll is for us to deicde which day to take a trip to the city.
-		</textarea>
-		<br>
-		   
-		<INPUT type="submit" name="submit" value="GO!"/>
-	</FORM>
+
+if ($votes > 0 )
+{
+	$printString = $printString . 'Editing has been disabled because people have voted. 
+	<br> <fieldset disabled>' . '
+
+		<div class="form-group">
+			Poll Title: <br>  
+			<INPUT type="text" name="Name" value = "' . $pollName . '" id="disabledTextInput" class="form-control" placeholder="Disabled input"/> <br>
+			<form role="form">';
+				
+			for($i = 0; $i < count($optionArray); $i++)
+			{
+
+				$printString = $printString . ' <br>
+				Option ' . $i . ': <br>
+				<INPUT type="text" name="Option' . $i . '" value = "' . $optionArray[$i]  . '" id="disabledTextInput" class="form-control" placeholder="Disabled input"/> <br>
+				<br> ';
+			}
+
+				$printString = $printString . '
+				Poll Description: <br>
+				<textarea rows="4" cols="50" name= "description>">' . $pollDesc . '
+				</textarea>
+				<br>
+
+				<INPUT type="submit" name="submit" value="GO!"/>
+			</FORM>';
+
+}
+
+
+
+else
+{
+	$printString = $printString . '
+
+		<div class="form-group">
+			Poll Title: <br>  
+			<INPUT type="text" name="Name" value = "' . $pollName . '"/> <br>
+			<form role="form">';
+
+			for($i = 0; $i < count($optionArray); $i++)
+			{
+				$printString = $printString . '
+				Option ' . $i . ': <br>
+				<INPUT type="text" name="Option' . $i . '" value = "' . $optionArray[$i]  . '"/> <br>
+				';
+			}
+				$printString = $printString . '
+				Poll Description: <br>
+				<textarea rows="4" cols="50" name= "description>">' . $pollDesc .  '
+				</textarea>
+				<br>
+
+				<INPUT type="submit" name="submit" value="GO!"/>
+			</FORM>';
+}
+
+
+
+
+	echo($printString);
+
+			?>

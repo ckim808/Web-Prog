@@ -63,7 +63,7 @@ function ajax_post(loc,dispLoc,file)
          }
          
          document.getElementById(dispLoc).innerHTML = optionString;
-         document.getElementById("secret").value = num;
+         document.getElementById("secrets").value = num;
 
      }
  }
@@ -89,8 +89,11 @@ function ajax_post(loc,dispLoc,file)
 <FORM action ="pollCreationScript.php" method="POST" id ="formPlace">
 
 	Poll Title: <br>  
-	<INPUT type="text" name="Name" /> <br>
-	<INPUT type="hidden" id = "secret" name="num" value= "3"; /> <br>
+
+	<INPUT type="text" name="Name" id="farts"/> <br>
+	<INPUT type="hidden" id = "secrets" name="num"/> 
+	
+	<br>
 	<div id="dispLoc"><b></b></div>
 	<br> Accessible By: <br>
 
