@@ -6,7 +6,7 @@ $requiredID = 2;
 $UID = $_SESSION['sessionUID'];
 
 //echo("$UID");
-include("databaseClass.php");
+                            include ("databaseClassMySQLi.php");
 
 $db = new database();
 $db->connect();
@@ -131,7 +131,7 @@ $db->disconnect();
                 <div class="panel-heading">Notifications</div>
                     <div class="list-group">
                         <?php
-                            include ("databaseClassMySQLi.php");
+
                             $db = new database();
                             $db->connect(); 
                             // get the deliverables that are already in the database

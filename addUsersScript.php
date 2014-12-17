@@ -38,7 +38,7 @@ else
       $passhash = $row["passhash"];
       $name = $row["name"];
 
-      $sql = "INSERT INTO `user`(`id`, `email`, `passhash`, `group_id`, `name`) VALUES ('$id','$email','$passhash','1', '$name')";
+      $sql = "INSERT INTO `user`(`id`, `email`, `passhash`, `group_id`, `name`) VALUES ('$id','$email','$passhash','3', '$name')";
       $result = $db->send_sql($sql);
 
       $sql = "DELETE FROM `pendinguser` WHERE `id` ='$id'";
