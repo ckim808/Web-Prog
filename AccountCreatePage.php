@@ -46,7 +46,7 @@
             <div id="dispLoc"><b></b></div>
             <br>
             <label for="password" >Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" pattern="^(?=.+\d).{4,8}$" name="password" class="form-control" placeholder="Password" required>
             <br>
             <INPUT type="submit" name="submit" value="GO!"/>
 
