@@ -130,7 +130,7 @@ $db->disconnect();
   				</div>
   				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   					<h1 class="page-header">Polls Page</h1>				
-  					<a href="javascript: jQuery.facebox({ajax:'NewPollPopUp.php'});" class = "btn btn-sm btn-primary" role = "button"> Add Event </a>
+  					<a href="javascript: jQuery.facebox({ajax:'NewEvent.php'});" class = "btn btn-sm btn-primary" role = "button"> Add Event </a>
                     <div id='calendar'></div>
 
   				</div>

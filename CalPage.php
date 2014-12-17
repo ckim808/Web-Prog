@@ -109,6 +109,21 @@ $db->disconnect();
     events: "events.php",
 
     selectable: false,
+        eventClick: function(calEvent, jsEvent, view) {
+            var starttime = calEvent.start.toLocaleString();
+            if(!calEvent.end)
+                var endtime = "";
+            else
+                var endtime = calEvent.end.toLocaleString();
+        alert('Event: ' + calEvent.title
+             + '\nDescription: ' + calEvent.description + '\nLocation: '
+             + calEvent.location + '\nStart Time: ' + starttime + '\nEnd Time: ' + 
+             endtime + '\nURL: ' + calEvent.url);
+
+        return false;
+
+    }
+    
     
   });
 
@@ -145,7 +160,7 @@ $db->disconnect();
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Calendar Page</h1>
-          <a id="new_event" href="javascript: jQuery.facebox({ajax:'NewDelivPopUp.php'});" class = "btn btn-sm btn-primary pull-right" role = "button"> New Event </a>
+          <a id="new_event" href="javascript: jQuery.facebox({ajax:'NewEvent.php'});" class = "btn btn-sm btn-primary pull-right" role = "button"> New Event </a>
 
           <div id='calendar'></div>
         </div>
