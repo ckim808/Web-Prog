@@ -1,8 +1,6 @@
 <?php
 	echo
-    '<div class="navbar-wrapper">
-          <div class="container">
-            <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    '<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
               <div class="container">
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -36,9 +34,6 @@
 		  <button onclick="location.href=\'LoginPage.php\';" id="login" type="button" class="navbar-button navbar-right">Log in</button>
                 </div>
               </div>
-            </nav>
-
-          </div>
-        </div>';
+            </nav>';
 	echo "\n";
 ?>
