@@ -66,8 +66,7 @@ function ajax_post(loc,dispLoc,file)
 
 
 	Poll Description: <br>
-	<textarea rows="4" cols="50" name= "description" >
-	</textarea>
+	<textarea rows="4" cols="50" name= "description" ></textarea>
 	<br>
 
 	<INPUT type="submit" name="submit" value="GO!"/>
