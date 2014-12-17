@@ -72,6 +72,15 @@ $db->disconnect();
     
      <script>
 
+         
+
+       
+	$(document).ready(function() {
+		$('a[rel*=facebox]').facebox({
+			loading_image : 'loading.gif',
+			close_image   : 'closelabel.png'
+		});
+	});
          $(document).ready(function() {
               var date = new Date();
               var d = date.getDate();
@@ -79,30 +88,11 @@ $db->disconnect();
               var y = date.getFullYear();
 
               var calendar = $('#calendar').fullCalendar({
-                   editable: false,
-                   header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-
-                    events: "events.php",
-
-                   selectable: false,
+                   
     
           });
 
          });
-
-        </script>
-    
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$('a[rel*=facebox]').facebox({
-			loading_image : 'loading.gif',
-			close_image   : 'closelabel.png'
-		})
-	})
 </script>
 
 <title>SASE Admin Home</title>
